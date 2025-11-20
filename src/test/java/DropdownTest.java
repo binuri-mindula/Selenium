@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class DropdownTest {
     WebDriver driver;
 
@@ -32,6 +34,33 @@ public class DropdownTest {
         select.selectByIndex(1);
         Thread.sleep(3000);
         select.selectByVisibleText("Puppeteer");
+
+        //get no of dropdown options
+        //generics
+        List<WebElement> listOfOptions =select.getOptions();
+        int size = listOfOptions.size();
+        System.out.println("No of Elements : " + size);
+
+        for(WebElement element: listOfOptions){
+            System.out.println(element.getText());
+        }
+
+        //using send keys to select dropdown values
+        dropdown.sendKeys("Puppeteer");
+
+        //selected value in a bootstrap dropdown(no select html tag)
+        WebElement dropdown2 = driver.findElement(By.xpath("//div[@id='j_idt87:country']"));
+        dropdown2.click();
+        List<WebElement> listOfValues = driver.findElements(By.xpath("//ul[@id='j_idt87:country_items']/li"));
+        for (WebElement element : listOfValues){
+            String dropdownValue = element.getText();
+            if (dropdownValue.equals("USA")) {
+                element.click();
+                break;
+            }
+
+        }
+
 
     }
 }
