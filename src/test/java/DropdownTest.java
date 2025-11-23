@@ -22,12 +22,12 @@ public class DropdownTest {
 //        Dimension newSize = new Dimension(800, 600);
 //        driver.manage().window().setSize(newSize);
         driver.manage().window().maximize();
-        driver.get("https://www.leafground.com/select.xhtml;jsessionid=node061r5l9t35nde1lbv4llbc2cev8896036.node0");
+
     }
 
     @Test
     public void leafGroundDropdownTest() throws InterruptedException {
-
+        driver.get("https://www.leafground.com/select.xhtml;jsessionid=node061r5l9t35nde1lbv4llbc2cev8896036.node0");
         //select values in basic dropdown
         WebElement dropdown = driver.findElement(By.xpath("//select[@class=\'ui-selectonemenu\']"));
         Select select = new Select(dropdown);
@@ -60,7 +60,33 @@ public class DropdownTest {
             }
 
         }
-
-
     }
+
+        //google search - pick a value from suggestion
+
+        @Test
+        public void googleSearchDropdown() throws InterruptedException {
+        driver.get("https://www.google.com/");
+        driver.findElement(By.name("q")).sendKeys("Palitha");
+        Thread.sleep(2000);
+        List<WebElement> googleSearchList = driver.findElements(By.xpath("//ul[@role='listbox']/li//div[@class='lnnVSe']"));
+            System.out.println("Google Search list" + googleSearchList.size());
+            for (WebElement element : googleSearchList){
+                String dropdownValue = element.getText();
+                System.out.println(dropdownValue);
+
+
+            }
+        }
+
+        //handle hidden auto suggestion dropdown and search using DOM debugger
+    //Dev tools -> sources -> snippets -> new ->
+    // setTimeout(function(){
+    //       debugger;
+    //     },3000);
+    //->run
+
+
+
+
 }
