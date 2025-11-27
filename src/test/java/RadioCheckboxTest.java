@@ -68,6 +68,21 @@ public class RadioCheckboxTest {
             //myAgeGroup.click();
             driver.findElement(By.xpath("//label[@for='j_idt87:age:0']")).click();
         }
+
+        //another way
+        String myAge = "1-20 Years";
+        List<WebElement> ageGroups = driver.findElements(By.xpath("//div[@id='j_idt87:age']//label"));
+
+        for(WebElement element: ageGroups){
+            String ageGroupText = element.getText();
+            if(ageGroupText.equals(myAge)){
+                WebElement myRadioButtonOption = driver.findElement(By.xpath("//label[text()='" + ageGroupText + "']/parent::div//input"));
+                if(!myRadioButtonOption.isSelected()){
+                    element.click();
+                }
+                break;
+            }
+        }
     }
 
     @Test
