@@ -1,3 +1,4 @@
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -56,9 +57,19 @@ public class ActionMouseTest {
         System.out.println("Location of slider point 1 after moving"+sliderPoint1.getLocation());
 
 
+    }
 
+    @Test
+    public void mouseTest2()  {
+        driver.get("https://swisnl.github.io/jQuery-contextMenu/demo.html");
 
-
+        WebElement rightClickButton = driver.findElement(By.xpath("//span[@class='context-menu-one btn btn-neutral']"));
+        Actions actionNew = new Actions(driver);
+        actionNew.contextClick(rightClickButton).perform();  // to right click we use context click
+        driver.findElement(By.xpath("//span[text()='Edit']")).click();
+        Alert alertPopup = driver.switchTo().alert();
+        System.out.println("Alert text is "+alertPopup.getText());
+        alertPopup.accept();
     }
 
 }
