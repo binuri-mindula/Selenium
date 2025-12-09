@@ -45,7 +45,17 @@ public class ActionMouseTest {
         WebElement from = driver.findElement(By.id("form:drag"));
         WebElement to = driver.findElement(By.id("form:drop"));
 
-        action.clickAndHold(from).moveToElement(to).release(to).perform();   // 1st way
+        //action.clickAndHold(from).moveToElement(to).release(to).perform();   // 1st way
+        action.dragAndDrop(from, to).perform();  //2nd way
+
+
+        //Slider option
+        WebElement sliderPoint1 = driver.findElement(By.xpath("//div[@id='form:j_idt125']//span[1]"));
+        System.out.println("Location of slider point 1 before moving"+sliderPoint1.getLocation());
+        action.dragAndDropBy(sliderPoint1,50 , 0).perform();
+        System.out.println("Location of slider point 1 after moving"+sliderPoint1.getLocation());
+
+
 
 
 
