@@ -7,6 +7,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class ActionKeyboardTest {
 
     WebDriver driver;
@@ -38,5 +40,22 @@ public class ActionKeyboardTest {
 
         //another way
 //        action.keyUp(searchBox,Keys.SHIFT).perform();
+    }
+
+    @Test
+    public void keyBoardTest2() throws InterruptedException {
+        driver.get("https://www.leafground.com/list.xhtml");
+
+        Thread.sleep(4000);
+        List<WebElement> selectables = driver.findElements(By.xpath("//ul[@aria-label='From']/li"));
+        int size = selectables.size();
+        System.out.println("Li size is "+size);
+
+        Actions action = new Actions(driver);
+        action.keyDown(Keys.CONTROL).click(selectables.get(0))
+                .click(selectables.get(2))
+                .click(selectables.get(3))
+                .click(selectables.get(2))
+                .perform();
     }
 }
